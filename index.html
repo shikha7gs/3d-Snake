@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enhanced 3D Snake Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #000; }
+        #info, #score {
+            position: absolute;
+            top: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #info {
+            left: 10px;
+        }
+        #score {
+            right: 10px;
+        }
+        #gameOverOverlay, #startOverlay, #pauseOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+        #gameOverOverlay.active, #startOverlay.active, #pauseOverlay.active {
+            display: flex;
+        }
+        #gameOverOverlay h1, #startOverlay h1, #pauseOverlay h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        #gameOverOverlay p, #startOverlay p, #pauseOverlay p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        #gameOverOverlay button, #startOverlay button, #pauseOverlay button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #00ff00;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+        .control-row {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .control-button {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .control-button:active {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        @media (min-width: 768px) {
+            #controls {
+                display: none;
+            }
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.module.js",
+            "three/examples/": "https://cdn.jsdelivr.net/npm/three@0.152.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="info">
+        <h2>3D Snake Game</h2>
+        <p><strong>Controls:</strong></p>
+        <ul>
+            <li><strong>Arrow Left (`←`)</strong>: Change direction to -X or +Z</li>
+            <li><strong>Arrow Right (`→`)</strong>: Change direction to +X or -Z</li>
+            <li><strong>Arrow Up (`↑`)</strong>: Move Up (+Y)</li>
+            <li><strong>Arrow Down (`↓`)</strong>: Move Down (-Y)</li>
+            <li><strong>P</strong>: Pause/Resume Game</li>
+        </ul>
+    </div>
+    <div id="score">Score: 0 | High Score: 0</div>
+
+    <div id="startOverlay" class="active">
+        <h1>Welcome to 3D Snake Game!</h1>
+        <p>Get ready to navigate the snake in a 3D environment.</p>
+        <button id="startButton">Start Game</button>
+    </div>
+
+    <div id="gameOverOverlay">
+        <h1>Game Over!</h1>
+        <p>Your Score: <span id="finalScore">0</span></p>
+        <button onclick="location.reload()">Restart Game</button>
+    </div>
+
+    <div id="pauseOverlay">
+        <h1>Paused</h1>
+        <button id="resumeButton">Resume Game</button>
+    </div>
+
+    <div id="controls">
+        <div class="control-row">
+            <button class="control-button" id="upButton">↑</button>
+        </div>
+        <div class="control-row">
+            <button class="control-button" id="leftButton">←</button>
+            <button class="control-button" id="pauseButton">❚❚</button>
+            <button class="control-button" id="rightButton">→</button>
+        </div>
+        <div class="control-row">
+            <button class="control-button" id="downButton">↓</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js">
+    </script>
+</body>
+</html>
