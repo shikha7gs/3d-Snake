@@ -1,14 +1,13 @@
-
 import * as THREE from 'three';
 
 const loader = new THREE.TextureLoader();
-const snakeTexture = loader.load('/snake.jpeg');
+const snakeTexture = loader.load('https://raw.githubusercontent.com/shikha7gs/3d-Snake/main/snake.jpeg');
 const foodTexture = loader.load('https:threejsfundamentals.org/threejs/resources/images/flower-1.jpg');
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x20232a);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(20, 20, 20);
 camera.lookAt(0, 0, 0);
 
@@ -44,18 +43,18 @@ const eatSound = new THREE.Audio(listener);
 
 const audioLoader = new THREE.AudioLoader();
 
-audioLoader.load('/bg.ogg', function(buffer) {
+audioLoader.load('https://raw.githubusercontent.com/shikha7gs/3d-Snake/main/bg.ogg', function (buffer) {
     backgroundSound.setBuffer(buffer);
     backgroundSound.setLoop(true);
     backgroundSound.setVolume(0.3);
-}, undefined, function(err) {
+}, undefined, function (err) {
     console.error('Error loading background sound:', err);
 });
 
-audioLoader.load('/eat.mp3', function(buffer) {
+audioLoader.load('https://raw.githubusercontent.com/shikha7gs/3d-Snake/main/eat.mp3', function (buffer) {
     eatSound.setBuffer(buffer);
     eatSound.setVolume(0.5);
-}, undefined, function(err) {
+}, undefined, function (err) {
     console.error('Error loading eat sound:', err);
 });
 
@@ -155,7 +154,7 @@ function getNewDirection(key, currentDir) {
     const isMovingHorizontally = currentDir.x !== 0 || currentDir.z !== 0;
     const isMovingVertically = currentDir.y !== 0;
 
-    switch(key) {
+    switch (key) {
         case 'ArrowRight':
             if (isMovingHorizontally) {
                 newDirection = new THREE.Vector3(-currentDir.z, 0, currentDir.x).normalize();
@@ -201,7 +200,7 @@ function togglePause() {
 }
 
 window.addEventListener('resize', onWindowResize, false);
-function onWindowResize(){
+function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -324,7 +323,7 @@ document.getElementById('pauseButton').addEventListener('touchstart', (e) => {
 function handleDirectionChange(directionKey) {
     if (!gameStarted || isPaused) return;
     let newDir = null;
-    switch(directionKey) {
+    switch (directionKey) {
         case 'up':
             newDir = new THREE.Vector3(0, 1, 0);
             break;
