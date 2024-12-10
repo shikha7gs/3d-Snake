@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 const loader = new THREE.TextureLoader();
 const snakeTexture = loader.load('https://raw.githubusercontent.com/shikha7gs/3d-Snake/main/snake.jpeg');
-const foodTexture = loader.load('https:threejsfundamentals.org/threejs/resources/images/flower-1.jpg');
+const foodTexture = loader.load('food.jpeg');
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x20232a);
